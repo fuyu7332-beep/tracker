@@ -1,0 +1,168 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --c-bg: #FFF5F5;
+  --c-surface: #FFFFFF;
+  --c-text: #4A3558;
+  --c-text2: #8B6F9E;
+  --c-text3: #C4B0D0;
+  --c-border: #F0E4F4;
+  --c-shadow: rgba(160, 130, 180, 0.12);
+
+  --c-pink: #FF8BA7;
+  --c-mint: #84D8D0;
+  --c-purple: #A78BFA;
+  --c-yellow: #F9C74F;
+  --c-orange: #F9844A;
+  --c-hotpink: #F984E5;
+  --c-blue: #6BB5E0;
+  --c-green: #43B97F;
+
+  --c-danger: #FF6B6B;
+  --c-success: #43B97F;
+
+  --radius-sm: 14px;
+  --radius: 20px;
+  --radius-lg: 26px;
+  --radius-xl: 34px;
+
+  --font: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing: 16px;
+  --spacing-lg: 20px;
+  --spacing-xl: 28px;
+}
+
+.dark {
+  --c-bg: #1A1823;
+  --c-surface: #252236;
+  --c-text: #E8DFF0;
+  --c-text2: #9B8AAB;
+  --c-text3: #5C4D6E;
+  --c-border: #36304A;
+  --c-shadow: rgba(0, 0, 0, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  overscroll-behavior: none;
+  transition: background 0.3s, color 0.3s;
+  min-height: 100dvh;
+}
+
+input, button, textarea {
+  font-family: var(--font);
+  font-size: inherit;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] { -moz-appearance: textfield; }
+
+/* Larger touch targets for mobile */
+.btn-touch {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Improved spacing for mobile cards */
+.mobile-card {
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing);
+  border-radius: var(--radius-lg);
+}
+
+.mobile-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Better tag spacing */
+.tag-group {
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+}
+
+/* Smoother transitions */
+.transition-all {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 12px), 12px);
+}
+
+/* ========== Animations ========== */
+@keyframes bounce-in {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-bounce-in { animation: bounce-in 0.4s ease-out; }
+.animate-slide-up { animation: slide-up 0.35s ease-out; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pop { animation: pop 0.3s ease-out; }
+.animate-shake { animation: shake 0.4s ease-in-out; }
+.animate-fade-in { animation: fade-in 0.3s ease-out; }
+
+.confetti-container {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999;
+}
+
+@keyframes confetti-piece {
+  0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-200px) scale(0) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: absolute;
+  width: 14px; height: 14px;
+  border-radius: 5px;
+  animation: confetti-piece 1s ease-out forwards;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 4px; }

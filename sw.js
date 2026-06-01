@@ -1,5 +1,5 @@
 ﻿const CACHE_NAME = 'tracker-v1';
-const ASSETS = ['/', '/index.html', '/manifest.json'];
+const ASSETS = ['/tracker/', '/tracker/index.html', '/manifest.json'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -20,3 +20,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+

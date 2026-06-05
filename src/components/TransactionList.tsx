@@ -1,14 +1,15 @@
-﻿import type { Transaction, Category, Tag } from '../types';
+import type { Transaction, Category, Tag, Account } from '../types';
 import EmptyState from './EmptyState';
 
 interface Props {
   transactions: Transaction[];
   categories: Category[];
   tags: Tag[];
+  accounts: Account[];
   onDelete: (id: number) => void;
 }
 
-export default function TransactionList({ transactions, categories, tags, onDelete }: Props) {
+export default function TransactionList({ transactions, categories, tags, accounts, onDelete }: Props) {
   if (transactions.length === 0) {
     return <EmptyState emoji="📝" title="还没有记录哦" subtitle="去记账页开始你的第一笔吧～" />;
   }

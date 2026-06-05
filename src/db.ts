@@ -1,6 +1,6 @@
-﻿import Dexie, { type Table } from 'dexie';
-import type { Category, Transaction, Tag, Budget, AppSettings } from './types';
-import { DEFAULT_CATEGORIES } from './types';
+import Dexie, { type Table } from 'dexie';
+import type { Category, Transaction, Tag, Budget, AppSettings, Account } from './types';
+import { DEFAULT_CATEGORIES, DEFAULT_ACCOUNTS } from './types';
 
 export class TrackerDB extends Dexie {
   transactions!: Table<Transaction, number>;
@@ -11,17 +11,22 @@ export class TrackerDB extends Dexie {
 
   constructor() {
     super('trackerDB');
-    this.version(2).stores({
+    this.version(3).stores({
       transactions: '++id, type, categoryId, date',
       categories: '++id, isDefault',
       tags: '++id',
       budgets: '++id, month',
+      accounts: '++id, type',
       settings: '++id, key',
     });
   }
 
   async initDefaults() {
     const count = await this.categories.count();
+    const acctCount = await this.accounts.count();
+    if (acctCount === 0) {
+      await this.accounts.bulkAdd(DEFAULT_ACCOUNTS.map(a => ({ ...a } as { id?: number; name: string; type: string; color: string; emoji: string; balance: number })));
+    }
     if (count === 0) {
       await this.categories.bulkAdd(
         DEFAULT_CATEGORIES.map((c) => ({ ...c } as Category))

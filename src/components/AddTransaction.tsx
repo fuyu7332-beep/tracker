@@ -1,10 +1,11 @@
-﻿import { useState } from 'react';
-import type { Category, Tag } from '../types';
+import { useState } from 'react';
+import type { Category, Tag, Account } from '../types';
 import QuickAmount from './QuickAmount';
 
 interface Props {
   categories: Category[];
   tags: Tag[];
+  accounts: Account[];
   onAdd: (data: {
     amount: number;
     type: 'expense' | 'income';
@@ -15,7 +16,7 @@ interface Props {
   }) => void;
 }
 
-export default function AddTransaction({ categories, tags, onAdd }: Props) {
+export default function AddTransaction({ categories, tags, accounts, onAdd }: Props) {
   const [amount, setAmount] = useState('');
   const [type, setType] = useState<'expense' | 'income'>('expense');
   const [categoryId, setCategoryId] = useState(0);
